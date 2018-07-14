@@ -1,16 +1,17 @@
 ﻿namespace LearningSystem.Web.Models.Courses
 {
-    using Service.Common;
     using Service.Models.Courses;
     using System;
     using System.Collections.Generic;
+
+    using static Core.GlobalConstants;
 
     public class CoursesWithPagingModel
     {
         public int TotalCourses { get; set; }
 
         public int TotalPages =>
-            (int)Math.Ceiling(this.TotalCourses / (double)ServiceGlobalConstants.CoursesPageSize);
+            (int)Math.Ceiling(this.TotalCourses / (double)CoursesPageSize);
 
         public int CurrentPage { get; set; }
 

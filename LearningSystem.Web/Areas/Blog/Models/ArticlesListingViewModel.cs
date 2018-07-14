@@ -1,9 +1,10 @@
 ﻿namespace LearningSystem.Web.Areas.Blog.Models
 {
-    using Service.Common;
     using Service.Models.Articles;
     using System;
     using System.Collections.Generic;
+
+    using static Core.GlobalConstants;
 
     public class ArticlesListingViewModel
     {
@@ -12,7 +13,7 @@
         public int CurrentPage { get; set; }
 
         public int TotalPages
-            => (int)Math.Ceiling((double)this.TotalArticles / ServiceGlobalConstants.ArticlesPageSize);
+            => (int)Math.Ceiling((double)this.TotalArticles / ArticlesPageSize);
 
         public int PreviousPage => this.CurrentPage == 1 ? 1 : CurrentPage - 1;
 

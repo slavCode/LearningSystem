@@ -13,6 +13,8 @@
     using System.Threading.Tasks;
     using Web.Controllers;
 
+    using static Core.GlobalConstants;
+
     public class CoursesController : BaseAdminController
     {
         private readonly UserManager<User> userManager;
@@ -28,7 +30,7 @@
 
         public async Task<IActionResult> Create()
         {
-            var trainers = await this.userManager.GetUsersInRoleAsync(WebGlobalConstants.TrainerRole);
+            var trainers = await this.userManager.GetUsersInRoleAsync(TrainerRole);
             var trainersListItems = trainers
                 .Select(t => new SelectListItem
                 {

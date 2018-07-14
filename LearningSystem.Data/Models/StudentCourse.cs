@@ -1,7 +1,8 @@
 ﻿namespace LearningSystem.Data.Models
 {
-    using Common;
     using System.ComponentModel.DataAnnotations;
+
+    using static Core.GlobalConstants;
 
     public class StudentCourse
     {
@@ -15,7 +16,7 @@
 
         public Grade? Grade { get; set; }
 
-        [MaxLength(DataModelValidationConstants.ExamSubmissionLength)]
+        [MaxLength(ExamSubmissionLength)]
         public byte[] ExamSubmission { get; set; }
     }
 }

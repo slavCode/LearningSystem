@@ -10,7 +10,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Models;
-    using static Common.ServiceGlobalConstants;
+
+    using static Core.GlobalConstants;
 
     public class TrainerService : ITrainerService
     {

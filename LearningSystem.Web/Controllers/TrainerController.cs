@@ -1,7 +1,6 @@
 ﻿namespace LearningSystem.Web.Controllers
 {
     using Data.Models;
-    using Infrastructure;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -12,7 +11,9 @@
     using System;
     using System.Threading.Tasks;
 
-    [Authorize(Roles = WebGlobalConstants.TrainerRole)]
+    using static Core.GlobalConstants;
+
+    [Authorize(Roles = TrainerRole)]
     public class TrainerController : Controller
     {
         private readonly ITrainerService trainers;

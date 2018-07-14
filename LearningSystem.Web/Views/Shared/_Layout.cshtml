@@ -1,4 +1,5 @@
-﻿@using LearningSystem.Web.Infrastructure
+﻿@using LearningSystem.Core
+@using LearningSystem.Web.Infrastructure
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,17 +49,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="Blog" asp-controller="Articles" asp-action="Index">Blog</a></li>
-                    @if (User.IsInRole(WebGlobalConstants.AdministratorRole))
+                    @if (User.IsInRole(GlobalConstants.AdministratorRole))
                     {
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a></li>
                         <li><a asp-area="Admin" asp-controller="Courses" asp-action="Create">Create course</a></li>
 
                     }
-                    @if (User.IsInRole(WebGlobalConstants.AuthorRole))
+                    @if (User.IsInRole(GlobalConstants.AuthorRole))
                     {
                         <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Create article</a></li>
                     }
-                    @if (User.IsInRole(WebGlobalConstants.TrainerRole))
+                    @if (User.IsInRole(GlobalConstants.TrainerRole))
                     {
                         <li><a asp-area="" asp-controller="Trainer" asp-action="Courses">Trainer</a></li>
                     }
@@ -68,16 +69,16 @@
         </div>
     </nav>
     <div class="container body-content">
-        @if (TempData.ContainsKey(WebGlobalConstants.TempDataSuccessMessageKey))
+        @if (TempData.ContainsKey(GlobalConstants.TempDataSuccessMessageKey))
         {
             <div class="alert alert-success ">
-                @TempData[WebGlobalConstants.TempDataSuccessMessageKey]
+                @TempData[GlobalConstants.TempDataSuccessMessageKey]
             </div>
         }
-        @if (TempData.ContainsKey(WebGlobalConstants.TempDataErrorMessageKey))
+        @if (TempData.ContainsKey(GlobalConstants.TempDataErrorMessageKey))
         {
             <div class="alert alert-danger">
-                @TempData[WebGlobalConstants.TempDataErrorMessageKey]
+                @TempData[GlobalConstants.TempDataErrorMessageKey]
             </div>
         }
     </div>

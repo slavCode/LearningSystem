@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.Common.DataModelValidationConstants;
+    using static Core.GlobalConstants;
 
     public class RegisterViewModel
     {

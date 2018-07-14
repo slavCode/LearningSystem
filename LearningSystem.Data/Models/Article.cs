@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.DataModelValidationConstants;
+    using static Core.GlobalConstants;
 
     public class Article
     {

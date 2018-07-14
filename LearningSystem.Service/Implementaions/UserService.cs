@@ -1,7 +1,6 @@
 ﻿namespace LearningSystem.Service.Implementaions
 {
     using AutoMapper.QueryableExtensions;
-    using Common;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
@@ -11,8 +10,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using static Common.ServiceGlobalConstants;
+    using Core;
+    using static Core.GlobalConstants;
 
     public class UserService : IUserService
     {
@@ -53,7 +52,7 @@
             var student = await this.db.Users.FirstOrDefaultAsync(u => u.Id == studentId);
             var course = await this.db.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
 
-            var certificateHtml = String.Format(ServiceGlobalConstants.Html,
+            var certificateHtml = String.Format(GlobalConstants.Html,
                                         course.Name,
                                         course.StartDate.ToShortDateString(),
                                         course.EndDate.ToShortDateString(),

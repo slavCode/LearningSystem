@@ -1,12 +1,11 @@
 ﻿namespace LearningSystem.Web.Areas.Admin.Models.Courses
 {
-    using Infrastructure;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.Common.DataModelValidationConstants;
+    using static Core.GlobalConstants;
 
     public class CreateCourseFormModel : IValidatableObject
     {
@@ -28,7 +27,7 @@
         public DateTime EndDate { get; set; }
 
         [Required]
-        [Display(Name = WebGlobalConstants.TrainerRole)]
+        [Display(Name = TrainerRole)]
         public string TrainerId { get; set; }
 
         public IEnumerable<SelectListItem> Trainers { get; set; }

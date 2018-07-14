@@ -12,8 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using static Data.Common.DataModelValidationConstants;
-    using static Infrastructure.WebGlobalConstants;
+    using static Core.GlobalConstants;
 
     [Area(BlogArea)]
     [Authorize]

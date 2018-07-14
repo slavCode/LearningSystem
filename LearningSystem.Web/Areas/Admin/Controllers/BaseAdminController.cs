@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Infrastructure.WebGlobalConstants;
+    using static Core.GlobalConstants;
 
     [Area(AdminArea)]
     [Authorize(Roles = AdministratorRole)]

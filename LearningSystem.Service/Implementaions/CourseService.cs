@@ -10,7 +10,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using static Common.ServiceGlobalConstants;
+    using static Core.GlobalConstants;
 
     public class CourseService : ICourseService
     {

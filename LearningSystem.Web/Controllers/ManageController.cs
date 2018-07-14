@@ -13,7 +13,7 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
-    using static Infrastructure.WebGlobalConstants;
+    using static Core.GlobalConstants;
 
     [Authorize]
     [Route("[controller]/[action]")]

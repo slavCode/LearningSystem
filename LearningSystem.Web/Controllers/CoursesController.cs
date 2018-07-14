@@ -1,8 +1,5 @@
 ﻿namespace LearningSystem.Web.Controllers
 {
-    using System;
-    using System.IO;
-    using Data.Common;
     using Data.Models;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Http;
@@ -11,7 +8,10 @@
     using Models.Courses;
     using Service;
     using Service.Models.Courses;
+    using System.IO;
     using System.Threading.Tasks;
+
+    using static Core.GlobalConstants;
 
     public class CoursesController : Controller
     {
@@ -51,7 +51,7 @@
         {
             if (exam == null) return BadRequest();
 
-            if (exam.Length > DataModelValidationConstants.ExamSubmissionLength
+            if (exam.Length > ExamSubmissionLength
                 || !exam.FileName.EndsWith(".zip"))
             {
                 this.TempData.AddErrorMessage(@"Invalid operation! File must be in ""zip"" format and less then 2 MB! ");

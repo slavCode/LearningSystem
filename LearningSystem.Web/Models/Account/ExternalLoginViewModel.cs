@@ -3,7 +3,7 @@ namespace LearningSystem.Web.Models.Account
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.Common.DataModelValidationConstants;
+    using static Core.GlobalConstants;
 
     public class ExternalLoginViewModel
     {

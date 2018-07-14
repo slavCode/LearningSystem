@@ -2,12 +2,14 @@
 {
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
+    using static Core.GlobalConstants;
+
     public static class TempDataDictonaryExtension
     {
         public static void AddSuccessMessage(this ITempDataDictionary tempData, string message)
-           => tempData[WebGlobalConstants.TempDataSuccessMessageKey] = message;
+           => tempData[TempDataSuccessMessageKey] = message;
 
         public static void AddErrorMessage(this ITempDataDictionary tempData, string message)
-           => tempData[WebGlobalConstants.TempDataErrorMessageKey] = message;
+           => tempData[TempDataErrorMessageKey] = message;
     }
 }
