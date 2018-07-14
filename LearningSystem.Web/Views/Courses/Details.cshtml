@@ -1,0 +1,136 @@
+﻿@using System.Net
+@model CourseDetailsViewModel
+@{
+    ViewData["Title"] = $"{Model.Course.Name}";
+    var studentOrStudentsText = Model.Course.Students == 1 ? "student" : "students";
+}
+
+<div class="jumbotron home-jumbotron details">
+    <h2 class="jumbotron-body-details">@ViewData["Title"].ToString().ToUpper()</h2>
+</div>
+<div class="single-courses-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 offset-lg-1 col-lg-1">
+            </div><!-- .col -->
+
+            <div class="col-12 col-lg-8">
+                <div class="course-info flex flex-wrap align-items-center">
+                    <div class="course-author flex flex-wrap align-items-center mt-3">
+                        <div>
+                            <label class="m-0">Teacher</label>
+                            <div>@Model.Course.Trainer</div>
+                        </div><!-- .author-wrap -->
+                    </div><!-- .course-author -->
+
+                    <div class="course-cats mt-3">
+                        <label class="m-0">Period</label>
+                        <div>@Model.Course.StartDate.ToShortDateString()</div>
+                        <div>@Model.Course.EndDate.ToShortDateString()</div>
+                    </div><!-- .course-cats -->
+
+                    <div class="course-students mt-3">
+                        <label class="m-0">Student</label>
+                        <div>@Model.Course.Students (REGISTERED)</div>
+                    </div><!-- .course-students -->
+
+                    <div class="mt-3">
+                        @if (@Model.IsTrainer)
+                        {
+                            <label class="m-0 inactive-course-text">
+                                You are the current trainer.
+                            </label>
+                        }
+                        else
+                        {
+                            if (Model.Course.IsActive)
+                            {
+                                if (!User.Identity.IsAuthenticated)
+                                {
+                                    <a class="btn"
+                                       asp-controller="Account"
+                                       asp-action="Login"
+                                       asp-route-returnurl="@Context.Request.Path">ENROLL NOW</a>
+                                }
+                                else
+                                {
+                                    if (!Model.IsStudentInCourse)
+                                    {
+                                        <a class="btn"
+                                           asp-controller="Courses"
+                                           asp-action="SignIn"
+                                           asp-route-courseId="@Model.Course.Id">ENROLL NOW</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn sign-out"
+                                           asp-controller="Courses"
+                                           asp-action="SignOut"
+                                           asp-route-courseId="@Model.Course.Id">SIGN OUT</a>
+
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                var examDate = Model.Course.EndDate.ToShortDateString()
+                                  == DateTime.UtcNow.AddDays(1).ToShortDateString();
+
+                                if (!Model.IsStudentInCourse)
+                                {
+                                    <label class="m-0 inactive-course-text">
+                                        The registration period has expired
+                                    </label>
+                                }
+                                else
+                                {
+                                    if (examDate)
+                                    {
+                                        <label class="m-0">Exam</label>
+                                        <form method="post"
+                                              enctype="multipart/form-data"
+                                              asp-controller="Courses"
+                                              asp-action="Submission"
+                                              asp-route-courseId="@Model.Course.Id">
+                                            <input type="file" name="exam" value="Browse" class="center-block" accept=".zip" />
+                                            <br />
+                                            <input type="submit" class="btn" value="Upload" />
+                                            <br />
+                                            <small>
+                                                *The file must be in <strong>.zip</strong> format and less then the <strong>2MB</strong>.
+                                            </small>
+                                        </form>
+                                        <br />
+                                    }
+                                    else if (Model.Course.EndDate < DateTime.UtcNow)
+                                    {
+                                        <label class="m-0 inactive-course-text">
+                                            The course is over.
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="m-0 inactive-course-text">
+                                            @Html.Raw($"{(Model.Course.EndDate - DateTime.UtcNow).Days} more days left.")
+                                        </label>
+                                    }
+                                }
+                            }
+                        }
+                    </div><!-- .buy-course -->
+                </div><!-- .course-info -->
+            </div><!-- .col -->
+
+        </div><!-- .row -->
+        <div class="single-course-cont-section">
+
+            <h2>Description</h2>
+            <p>@Model.Course.Description</p>
+        </div>
+    </div><!-- .container -->
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CourseListingServiceModel>
+@{
+    var random = new Random();
+}
+
+@foreach (var course in Model)
+{
+    
+
+    <div class="col-md-4">
+        <div class="course-content">
+            <figure class="course-thumbnail">
+                <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">
+                    <img src="/images/@(random.Next(1,6)).jpg" alt="">
+                </a>
+            </figure><!-- .course-thumbnail -->
+
+            <div class="course-content-wrap">
+                <header class="entry-header">
+                    <h2 class="entry-title">@course.Name</h2>
+
+                    <div class="entry-meta flex align-items-center" style="font-size: 16px !important">
+                        <div class="course-author">@course.Trainer</div>
+
+                        <div class="course-date" style="font-size: 14px !important">@course.StartDate.ToString("d") - @course.EndDate.ToString("d")</div>
+                    </div><!-- .course-date -->
+                </header><!-- .entry-header -->
+
+            </div><!-- .course-content-wrap -->
+        </div><!-- .course-content -->
+    </div><!-- .col -->
+}
+

@@ -1,0 +1,23 @@
+﻿@using System.Globalization
+@model ArticleDetailsViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+}
+
+
+<div class="jumbotron home-jumbotron article-details">
+    <h2 class="jumbotron-article-details">@ViewData["Title"].ToString().ToUpper()</h2>
+
+    <p class="article-author">@Model.Author</p>
+    <p class="blog-date">@Model.PublishDate.Day @Model.PublishDate.ToString("MMM",
+                                                    CultureInfo.InvariantCulture)</p>
+</div>
+<br/>
+
+<div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="single-post-wrap">
+            <p>@Html.Raw(Model.Content)</p>
+        </div><!-- .single-post-wrap -->
+    </div><!-- .col -->
+</div>

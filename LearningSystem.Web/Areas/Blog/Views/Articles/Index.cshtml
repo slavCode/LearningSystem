@@ -1,0 +1,120 @@
+﻿@using System.Globalization
+@using LearningSystem.Web.Infrastructure.Extensions
+@model ArticlesListingViewModel
+@{
+    ViewData["Title"] = "Articles";
+    var previousDisabled = this.Model.CurrentPage == 1
+        ? "disabled"
+        : String.Empty;
+    var nextDisabled = this.Model.CurrentPage == this.Model.TotalPages
+        ? "disabled"
+        : String.Empty;
+
+    var random = new Random();
+}
+<div class="text-center">
+    <div>
+        <div class="row" style="margin-top: -30px !important">
+            <div class="col-12">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a style="font-size:30px "><i class="fas fa-book-open"></i> @ViewData["Title"]</a></li>
+                    </ul>
+                </div><!-- .breadcrumbs -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div>
+</div>
+<div class="row" style="margin-right: -14px">
+    <form asp-action="Index">
+        <div class="col-md-12">
+            <div class="search-widget flex">
+                <input asp-for="SearchTerm" type="search" placeholder="Search...">
+                <button type="submit" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br />
+@if (!string.IsNullOrEmpty(@Model.SearchTerm))
+{
+    <h4>Search results for "@Model.SearchTerm"</h4>
+}
+<div class="blog-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="margin-right: 32px !important">
+                <div class="blog-posts">
+                    <div class="row mx-m-25">
+
+                        @foreach (var article in @Model.Articles)
+                        {
+                            <div class="col-12 col-md-4 px-25">
+                                <div class="blog-post-content">
+                                    <figure class="blog-post-thumbnail position-relative m-0">
+                                        <a asp-action="Details"
+                                           asp-route-id="@article.Id"
+                                           asp-route-title="@article.Title.ToFriendlyUrl()"><img src="/images/b-@(random.Next(1,6)).jpg" alt=""></a>
+
+                                        <div class="posted-date position-absolute">
+                                            <div class="day">@article.PublishDate.Day</div>
+                                            <div class="month">
+                                                @article.PublishDate.ToString("MMM",
+                                                    CultureInfo.InvariantCulture)
+                                            </div>
+                                        </div>
+                                    </figure><!-- .blog-post-thumbnail -->
+
+                                    <div class="blog-post-content-wrap">
+                                        <header>
+                                            <h2 class="entry-title">
+                                                <a asp-action="Details"
+                                                   asp-route-id="@article.Id"
+                                                   asp-route-title="@article.Title.ToFriendlyUrl()">@article.Title</a>
+                                            </h2>
+
+                                            <div class="entry-meta flex align-items-center">
+                                                <div class="post-author">
+                                                    <a asp-controller="Users"
+                                                       asp-action="Profile"
+                                                       asp-route-username="@article.AuthorUsername"
+                                                       asp-route-title="@article.Title.ToFriendlyUrl()">@article.Author</a>
+                                                </div>
+                                            </div><!-- .entry-meta -->
+                                        </header><!-- .entry-header -->
+
+                                        <div class="entry-content">
+                                            <p class="crop-text">@Html.Raw(article.Content)</p>
+                                        </div><!-- .entry-content -->
+                                    </div><!-- .blog-post-content-wrap -->
+                                </div><!-- .blog-post-content -->
+                            </div><!-- .col -->
+                        }
+
+                    </div><!-- .blog-posts -->
+                </div><!-- .col -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+    
+    <div class="text-center">
+        <ul class="pagination">
+            <li class="page-item @previousDisabled">
+                <a asp-area="Blog"
+                   asp-controller="Articles"
+                   asp-action="Index"
+                   asp-route-page="@Model.PreviousPage">Newer</a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-area="Blog"
+                   asp-controller="Articles"
+                   asp-action="Index"
+                   asp-route-page="@Model.NextPage">Older</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
