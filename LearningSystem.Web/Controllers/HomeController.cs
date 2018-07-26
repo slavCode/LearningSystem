@@ -11,6 +11,7 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    [IgnoreAntiforgeryToken]
     public class HomeController : Controller
     {
         private readonly ICourseService courses;

@@ -120,7 +120,8 @@
                                         @user.Email
                                     </td>
                                     <td class="col-md-1">
-                                        <form asp-controller="Users"
+                                        <form method="get"
+                                              asp-controller="Users"
                                               asp-action="Profile"
                                               asp-route-username="@user.Username">
                                             <input type="submit"
